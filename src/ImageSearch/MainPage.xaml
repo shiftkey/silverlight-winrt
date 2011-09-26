@@ -1,0 +1,23 @@
+﻿<UserControl x:Class="ImageSearch.MainPage" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  
+  <!-- Data -->
+  <UserControl.Resources>
+    <CollectionViewSource x:Name="cvs"/>
+  </UserControl.Resources>
+
+  <Grid x:Name="LayoutRoot" Background="#FF0C0C0C">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="*"/>
+    </Grid.RowDefinitions>
+
+    <StackPanel Orientation="Horizontal">
+      <TextBlock Text="Image Search: " Style="{StaticResource HeaderText}"/>
+      <TextBox x:Name="headerText" Style="{StaticResource HeaderTextBox}" Grid.Column="1"/>
+      <Button x:Name="go" Content="Go" Style="{StaticResource ButtonStyle}" Click="Button_Click"/>
+    </StackPanel>
+
+    <ListBox x:Name="lb" Grid.Row="1" ItemsSource="{Binding Source={StaticResource cvs}}" Style="{StaticResource ImageView}" ItemTemplate="{StaticResource ImageTemplate}" ItemContainerStyle="{StaticResource ListItemStyle}"/>
+
+  </Grid>
+</UserControl>
