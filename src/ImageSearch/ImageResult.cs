@@ -105,7 +105,11 @@ namespace ImageSearch
 
         public static IList<object> GetEmptyList()
         {
+#if SILVERLIGHT
             return new ObservableVector<object>();
+#elif WINRT
+            return new ObservableCollection<object>();
+#endif
         }
 
         private void NavigatePage(object param)

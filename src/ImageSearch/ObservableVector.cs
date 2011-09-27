@@ -6,5 +6,7 @@ using System.Collections.ObjectModel;
 
 namespace ImageSearch
 {
+#if SILVERLIGHT
   public class ObservableVector<T> : ObservableCollection<T> {}
+#endif
 }
