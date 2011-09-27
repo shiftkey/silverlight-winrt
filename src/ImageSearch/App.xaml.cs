@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+#if SILVERLIGHT
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -9,12 +10,17 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
+#else
+using Windows.UI.Xaml;
+#endif
+
 
 namespace ImageSearch
 {
     public partial class App : Application
     {
 
+#if SILVERLIGHT
         public App()
         {
             this.Startup += this.Application_Startup;
@@ -64,5 +70,30 @@ namespace ImageSearch
             {
             }
         }
+#elif WINRT
+        public App()
+        {
+            this.UnhandledException += this.Application_UnhandledException;
+            this.Exiting += App_Exiting;
+
+            InitializeComponent();
+        }
+
+        void App_Exiting(object sender, object e)
+        {
+            
+        }
+
+        protected override void OnLaunched(Windows.ApplicationModel.Activation.LaunchActivatedEventArgs args)
+        {
+            Window.Current.Content = new MainPage();
+            Window.Current.Activate();
+        }
+        private void Application_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            // TODO: some stuff
+        }
+
+#endif
     }
 }
